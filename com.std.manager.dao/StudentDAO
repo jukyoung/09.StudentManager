@@ -1,0 +1,54 @@
+package com.stdmanager.dao;
+
+import com.stdmanager.dto.StudentDTO;
+
+public class StudentDAO {
+
+	private StudentDTO[] st = new StudentDTO[10];
+	private int count = 0;
+
+	public void insert(StudentDTO std) {
+		st[count++] = std;
+	}
+
+	public StudentDTO[] selectAll() {
+		return st;
+	}
+
+	public void delete(int no) {
+
+		for (int i = 0; i < st.length; i++) {
+			if (st[i] != null) {
+				if (no == st[i].getNo()) {
+					st[i] = null;
+					break;
+				}
+			}
+
+		}
+	}
+
+	public void modify(StudentDTO std) {
+		for (int i = 0; i < st.length; i++) {
+			if (st[i] != null) {
+				if (st[i].getNo() == std.getNo()) {
+					st[i].setName(std.getName());
+					st[i].setAge(std.getAge());
+					st[i].setGender(std.getGender());
+					break;
+				}
+			}
+
+		}
+	}
+//	public boolean doseNoExist(int no) {
+//		for(int i = 0; i <st.length; i++) {
+//			if(st[i] != null) {
+//				if(st[i].getNo() == no) {
+//					return true;
+//				}
+//			}
+//		}
+//	}
+
+}
