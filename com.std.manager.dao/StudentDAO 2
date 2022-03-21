@@ -1,0 +1,53 @@
+package com.stdmanager.dao;
+
+import java.util.ArrayList;
+
+import com.stdmanager.dto.StudentDTO;
+
+public class StudentDAO {
+	
+    private ArrayList stdList = new ArrayList<>();
+	
+	public void insert(StudentDTO std) {
+		stdList.add(std);
+	}
+
+	public ArrayList selectAll() {
+		return stdList;
+	}
+
+	public void delete(int no) {
+		for (int i = 0; i < stdList.size(); i++) {
+				if (no == ((StudentDTO) stdList.get(i)).getNo()) { 
+					//getNo가 StudentDTO에 있기때문에 object형을 강제형변환
+					stdList.remove(i);
+					break;
+				}
+			}
+		}
+
+	public void modify(StudentDTO std) {
+		for (int i = 0; i < stdList.size(); i++) {
+				if (((StudentDTO)stdList.get(i)).getNo() == std.getNo()) {
+					stdList.set(i, std);
+					//새로운 StudentDTO 형 인스턴스로 기존 배열에서 갈아끼우는 작업
+					
+					//원래 있는 인스턴스에서 각각의 값만 갈아끼우는 작업
+//					((StudentDTO)stdList.get(i)).setName(std.getName());
+//					((StudentDTO)stdList.get(i)).setAge(std.getAge());
+//					((StudentDTO)stdList.get(i)).setGender(std.getGender());
+					break;
+			}
+
+		}
+	}
+	public boolean doseNoExist(int no) {
+		for(int i = 0; i <stdList.size(); i++) {
+				if(((StudentDTO)stdList.get(i)).getNo() == no) {
+					return true;
+			}
+		}
+		return false;
+	}
+
+}
